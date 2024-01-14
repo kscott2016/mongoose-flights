@@ -12,4 +12,7 @@ router.get('/new', flightsCtrl.new)
 // GET localhost:3000/flights/new
 router.post('/', flightsCtrl.create)
 
+// GET localhost:3000/:flightId
+router.delete('/:flightId', flightsCtrl.delete)
+
 export { router }

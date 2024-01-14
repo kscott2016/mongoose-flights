@@ -22,18 +22,28 @@ function newFlight (req,res){
 
 function create(req,res){
 
-  // for(let key in req.body){
- 
-  //  if(req.body[key]==='')delete req.body[key]
-  // }
   Flight.create(req.body).then(flight=>{
-   res.redirect('/flights')
+  res.redirect('/flights')
   })
+}
+
+function deleteFlight(req,res){
+
+  Flight.findByIdAndDelete(req.params.flightId)
+  .then(flight=>{
+    res.redirect('/flights')
+  })
+  .catch (err=>{
+    console.log(err)
+    res.redirect('/flights')
+  })
+
 }
 
 
 export{
   index,
   newFlight as new,
-  create
+  create,
+  deleteFlight as delete
 }
