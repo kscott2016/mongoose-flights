@@ -5,12 +5,25 @@
 <main>
   <h1><%= title %></h1>
   <form if="new-form" action="/flights/<%= flight._id %>?_method=PUT" method="POST">
-    <label for="airline-input">Airline:</label>
-    <input type="text" name="airline" id="airline-input">
-    <label for="airport-input">Airport:</label>
-    <input type="text" name="airport" id="airport-input">
+    <label for="airline-seclection">Airline:</label>
+    <select id="airline-seclection" name="airline">
+      <option value="">--Select an airline--</option>
+      <option value="American">American</option>
+      <option value="Southwest">Southwest</option>
+      <option value="United">United</option>
+    </select>
+    <!-- <input type="text" name="airline" id="airline-input"> -->
+    <label for="airport-selection">Airport:</label>
+    <select id="airport-seclection" name="airport">
+      <option value="AUS">AUS</option>
+      <option value="DFW">DFW</option>
+      <option value="DEN" selected>DEN</option>
+      <option value="LAX">LAX</option>
+      <option value="SAN">SAN</option>
+    </select>
+    <!-- <input type="text" name="airport" id="airport-input"> -->
     <label for="flight-number-input">Flight Number:</label>
-    <input type="text" name="flightNo" id="flight-number-input">
+    <input type="number" name="flightNo" id="flight-number-input" min="10" max="9999">
     <label for="flight-date">Flight Date:</label>
     <input type="date" name="departs" id="flight-date">
     <button type="submit">Save Flight</button>

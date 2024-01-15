@@ -15,12 +15,17 @@ function index(req,res){
 }
 
 function newFlight (req,res){
+  
     res.render('flights/new',{
       title:"Add a new flight",
     })
 }
 
 function create(req,res){
+
+  if (!req.body.departs) {
+    req.body.departs = req.body.createdAt
+  }
 
   Flight.create(req.body).then(flight=>{
   res.redirect('/flights')
