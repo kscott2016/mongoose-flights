@@ -24,7 +24,13 @@ function newFlight (req,res){
 function create(req,res){
 
   if (!req.body.departs) {
-    req.body.departs = req.body.createdAt
+    //req.body.departs = req.body.createdAt
+    let currentDate= new Date()
+    //console.log("CURRENT DATE:"+ currentDate)
+  // currentDate.setDate(req.body.createdAt)
+  let nextYear= currentDate.getFullYear()
+  currentDate.setFullYear(nextYear+1)
+  req.body.departs = currentDate
   }
 
   Flight.create(req.body).then(flight=>{
