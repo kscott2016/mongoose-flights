@@ -23,14 +23,9 @@ function newFlight (req,res){
 
 function create(req,res){
 
+  //sets default date if flight is null
   if (!req.body.departs) {
-    //req.body.departs = req.body.createdAt
-    let currentDate= new Date()
-    //console.log("CURRENT DATE:"+ currentDate)
-  // currentDate.setDate(req.body.createdAt)
-  let nextYear= currentDate.getFullYear()
-  currentDate.setFullYear(nextYear+1)
-  req.body.departs = currentDate
+    req.body.departs= Flight.departs
   }
 
   Flight.create(req.body).then(flight=>{
@@ -65,16 +60,34 @@ function show(req,res){
 }
 
 function edit(req,res){
+
+  if (!req.body.departs) {
+    req.body.departs= Flight.departs
+  }
+  
   Flight.findById(req.params.flightId).then(flight=>{
+    //console.log("DATE: "+ flight.departs)
+    // let theMonth=flight.departs.getMonth()
+    //     let theDay=flight.departs.getDate()
+    //     let theYear= flight.departs.getFullYear()
+    //     let dateString = theYear+"-"+theMonth+"-"+theDay
+    //     console.log("DateString: "+ dateString)
+
+    const flightDefaultDate = flight.departs
+    console.log("Default Date: "+ flightDefaultDate)
+
     res.render(`flights/edit`,{
       flight:flight,
+      //flightDefaultDate:Flight.departs,
       title: `Edit Flight: ${req.params.flightId}`
     })
   })
 }
 
 function update(req,res){
-  Flight.findByIdAndUpdate(req.params.flightId,req.body).then(flight=>{
+
+Flight.findByIdAndUpdate(req.params.flightId,req.body).then(flight=>{
+
     res.redirect(`/flights/${flight._id}`)
     })
     .catch(err=>{

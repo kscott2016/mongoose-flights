@@ -8,24 +8,40 @@
     <label for="airline-seclection">Airline:</label>
     <select id="airline-seclection" name="airline">
       <option value="">--Select an airline--</option>
-      <option value="American">American</option>
-      <option value="Southwest">Southwest</option>
-      <option value="United">United</option>
+      <option value="American" <% if (flight.airline==="American") { %>
+      selected
+      <% } %>>American</option>
+      <option value="Southwest"  <% if (flight.airline==="Southwest") { %>
+        selected
+        <% } %>>Southwest</option>
+      <option value="United"  <% if (flight.airline==="United") { %>
+        selected
+        <% } %>>United</option>
     </select>
     <!-- <input type="text" name="airline" id="airline-input"> -->
     <label for="airport-selection">Airport:</label>
     <select id="airport-seclection" name="airport">
-      <option value="AUS">AUS</option>
-      <option value="DFW">DFW</option>
-      <option value="DEN" selected>DEN</option>
-      <option value="LAX">LAX</option>
-      <option value="SAN">SAN</option>
+      <option value="AUS"  <% if (flight.airport==="AUS") { %>
+        selected
+        <% } %>>AUS</option>
+      <option value="DFW"  <% if (flight.airport==="DFW") { %>
+        selected
+        <% } %>>DFW</option>
+      <option value="DEN"  <% if (flight.airport==="DEN") { %>
+        selected
+        <% } %>>DEN</option>
+      <option value="LAX"  <% if (flight.airport==="LAX") { %>
+        selected
+        <% } %>>LAX</option>
+      <option value="SAN"  <% if (flight.airport==="SAN") { %>
+        selected
+        <% } %>>SAN</option>
     </select>
     <!-- <input type="text" name="airport" id="airport-input"> -->
     <label for="flight-number-input">Flight Number:</label>
-    <input type="number" name="flightNo" id="flight-number-input" min="10" max="9999">
+    <input type="number" name="flightNo" id="flight-number-input" min="10" max="9999" value="<%= flight.flightNo %>">
     <label for="flight-date">Flight Date:</label>
-    <input type="date" name="departs" id="flight-date">
+    <input type="date" name="departs" id="flight-date" >
     <button type="submit">Save Flight</button>
   </form>
 </main>

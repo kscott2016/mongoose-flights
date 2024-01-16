@@ -19,17 +19,13 @@ const flightSchema= new Schema({
   },
   departs:{
     type: Date,
-    // default: function() {
-    //   let currentDate = new Date()
-    //   let nextYear= currentDate.getUTCFullYear()+1
-  	//   currentDate.setUTCFullYear(nextYear)
-    //   let dateString= currentDate.toUTCString()
-    //   //return dateString
-    //   return currentDate.setUTCFullYear(nextYear)
-      
-    // }
-    default: Date.now,
-    //required:true
+    default: function() {
+      let currentDate = new Date()
+      let currentYear= currentDate.getFullYear()
+  	  currentDate.setFullYear(currentYear+1)
+      //console.log("NEW FLIGHT DATE MADE: "+ currentDate)
+      return currentDate
+    }
   },
 },{
   timestamps: true
