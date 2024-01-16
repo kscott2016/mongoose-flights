@@ -71,15 +71,20 @@ function edit(req,res){
   }
   
   Flight.findById(req.params.flightId).then(flight=>{
-    //console.log("DATE: "+ flight.departs)
-    // let theMonth=flight.departs.getMonth()
-    //     let theDay=flight.departs.getDate()
-    //     let theYear= flight.departs.getFullYear()
-    //     let dateString = theYear+"-"+theMonth+"-"+theDay
-    //     console.log("DateString: "+ dateString)
+
+    console.log("flight.departs: "+ flight.departs)
+
+    if(flight.departs===null){
+      
+      let currentDate = new Date()
+      let currentYear= currentDate.getFullYear()
+      currentDate.setFullYear(currentYear+1)
+      flight.departs= currentDate
+      console.log("UPDATED flight.departs: "+ flight.departs)
+    }
 
     const flightDefaultDate = flight.departs.toISOString().slice(0,16)
-    console.log("Default Date: "+ flightDefaultDate)
+    //console.log("Default Date: "+ flightDefaultDate)
 
     res.render(`flights/edit`,{
       flight:flight,
