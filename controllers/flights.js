@@ -15,9 +15,13 @@ function index(req,res){
 }
 
 function newFlight (req,res){
+
+  // const flightDefaultDate = flight.departs.toISOString().slice(0,16)
+  //   console.log("Default Date: "+ flightDefaultDate)
   
     res.render('flights/new',{
       title:"Add a new flight",
+      flightDefaultDate:new Date().toISOString().slice(0,16)
     })
 }
 
@@ -29,7 +33,8 @@ function create(req,res){
   }
 
   Flight.create(req.body).then(flight=>{
-  res.redirect('/flights')
+    
+    res.redirect('/flights')
   })
 }
 
@@ -73,12 +78,12 @@ function edit(req,res){
     //     let dateString = theYear+"-"+theMonth+"-"+theDay
     //     console.log("DateString: "+ dateString)
 
-    const flightDefaultDate = flight.departs
+    const flightDefaultDate = flight.departs.toISOString().slice(0,16)
     console.log("Default Date: "+ flightDefaultDate)
 
     res.render(`flights/edit`,{
       flight:flight,
-      //flightDefaultDate:Flight.departs,
+      flightDefaultDate:flightDefaultDate,
       title: `Edit Flight: ${req.params.flightId}`
     })
   })
