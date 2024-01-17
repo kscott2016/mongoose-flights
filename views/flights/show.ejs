@@ -9,9 +9,10 @@
 <p>Flight number: <%= flight.flightNo %></p>
 <a href="/flights/<%= flight._id %>/edit">Edit Flight</a>
 
-<h2>Tickets</h2>
+
 <% if (flight.tickets.length) { %>
-  <p>Tickets were made</p>
+
+  <h2>Tickets</h2>
   <table>
     <thead>
       <tr>
@@ -32,8 +33,14 @@
     </table>
  
 <% } else { %>
- <p>No tickets added yet</p>
+  <p>No tickets added yet</p>
 <% } %>
+
+
+
+
+
+<h2>Add a ticket</h2>
 
 <form 
 id="add-ticket-form"
