@@ -20,7 +20,7 @@ body {
   color: #424748;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: 70px 2fr;
   grid-template-areas:
     "nav"
     "main";
@@ -42,7 +42,8 @@ body > main h1:first-child {
 
 body > nav {
   grid-area: nav;
-  background-color: #b8c0c2;
+  /* background-color: #b8c0c2; */
+  background-image: linear-gradient(rgb(2, 0, 74), rgb(10, 1, 51));
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -51,6 +52,7 @@ body > nav {
 
 nav > i {
   width: 34px;
+  color:#fff;
   object-fit: contain;
   margin-right: auto;
 }
@@ -60,21 +62,19 @@ nav > a {
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
-  color: #424748;
+  color: #e0faff;
 }
 
 nav > a:visited {
-  color: #424748;
+  color: #e0faff;
 }
 
-nav > a:hover {
-  color: white;
-  background-color: #424748;
+nav > a:hover, nav > a.active {
+  color: rgb(2, 0, 74);
+  background-color: rgb(255, 255, 255);
 }
 
-nav > a.active {
-  color: white;
-}
+
 
 .fas::before {
   font-family: "Font Awesome 5 Free";

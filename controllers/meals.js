@@ -4,7 +4,7 @@ function newMeal(req,res){
 
   Meal.find({}).sort('name')
   .then(meals=>{
-    res.render('meals/new',{
+        res.render('meals/new',{
       meals:meals,
       title: 'Add Meal'
     })
@@ -17,16 +17,59 @@ function newMeal(req,res){
 }
 
 function create (req, res){
-  Meal.create(req.body)
-  .then(meal=>{
-    res.redirect('/meals/new')
+
+  console.log("MEAL Added:", req.body.name)
+
+  Meal.find({name:req.body.name})
+  .then(foundMeal=>{
+    console.log("FOUND MEAL: ", foundMeal.length)
+    if(!foundMeal.length){
+      Meal.create(req.body)
+      .then(meal=>{
+        res.redirect('/flights')
+        })
+        .catch(err=>{
+          console.log(err)
+          res.redirect('/flights')
+        })
+    }
+    else{
+      res.redirect('/meals/new')
+    }
   })
   .catch(err=>{
+    console.log("ERROR HIT: ")
     console.log(err)
     res.redirect('/meals/new')
   })
-}
+  
+  // if(!(!!Meal.find({name:`${req.body.name}`}))){
+  //   //console.log("This exists!!!")
+  //   Meal.create(req.body)
+  //   .then(meal=>{
+  //     res.redirect('/flights')
+  //   })
+  //   .catch(err=>{
+  //     console.log(err)
+  //     res.redirect('/flights')
+  //   })
+  // }
 
+  // else{
+  //   res.redirect('/flights')
+  // }
+
+
+//-----FAILSAFE CODE
+  // Meal.create(req.body)
+  // .then(meal=>{
+  //   res.redirect('/flights')
+  // })
+  // .catch(err=>{
+  //   console.log(err)
+  //   res.redirect('/flights')
+  // })
+}
 export{
   newMeal as new,
   create

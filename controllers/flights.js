@@ -17,12 +17,8 @@ function index(req,res){
 }
 
 function newFlight (req,res){
-
-  // const flightDefaultDate = flight.departs.toISOString().slice(0,16)
-  //   console.log("Default Date: "+ flightDefaultDate)
-  
     res.render('flights/new',{
-      title:"Add a new flight",
+      title:"Add Flight",
       flightDefaultDate:new Date().toISOString().slice(0,16)
     })
 }
@@ -55,10 +51,17 @@ function deleteFlight(req,res){
 
 function show(req,res){
   Flight.findById(req.params.flightId)
+  .populate('meals')
   .then(flight => {
-    res.render('flights/show',{
-      title: `Flight: ${req.params.flightId}`, 
-      flight:flight
+
+    Meal.find({_id: {$nin:flight.meals}})
+    .then(meals=>{
+      
+      res.render('flights/show',{
+        title: `Flight: ${req.params.flightId}`, 
+        flight:flight,
+        meals:meals
+      })
     })
   })
   .catch (err=>{
@@ -129,6 +132,27 @@ function createTicket(req,res){
   })
 }
 
+function addMeals(req, res) {
+
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    console.log("Flight", flight)
+    flight.meals.push(req.body.mealId)
+    flight.save()
+		.then(() => {
+		  res.redirect(`/flights/${flight._id}`)
+		})
+    .catch(err => {
+      console.log(err)
+      res.redirect("/flights")
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/flights")
+  })
+}
+
 
 export{
   index,
@@ -138,5 +162,6 @@ export{
   show,
   edit,
   update,
-  createTicket
+  createTicket,
+  addMeals
 }
